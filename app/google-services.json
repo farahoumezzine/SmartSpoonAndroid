@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "977210215670",
+    "project_id": "smartspoon-da329",
+    "storage_bucket": "smartspoon-da329.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977210215670:android:dca818d32a3940403ab0d7",
+        "android_client_info": {
+          "package_name": "com.example.smartspoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvqp0tl8LpM6Ku6Dz63g9-6UZh1K9MejA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

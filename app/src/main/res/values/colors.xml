@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="Burgandi">#AF1740</color>
+    <color name="burg1">#CC2B52</color>
+    <color name="Burg2">#DE7C7D</color>
+    <color name="Burg3">#740938</color>
+    <color name="beige">#FFF4EA</color>
+    <color name="red">#FF0000</color>
+
+    <color name="orange">#EB8317 </color>
+    <color name="yellow">#F3C623  </color>
+    <color name="blue">#10375C  </color>
+
+</resources>
