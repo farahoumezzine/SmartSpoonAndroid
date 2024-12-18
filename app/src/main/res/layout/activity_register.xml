@@ -75,6 +75,16 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="16dp"/>
 
+            <!-- Password Strength Indicator -->
+            <TextView
+                android:id="@+id/tv_password_strength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password Strength"
+                android:textColor="@color/beige"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
             <!-- Register Button -->
             <Button
                 android:id="@+id/btn_register"

@@ -25,17 +25,16 @@
                 android:layout_height="131dp">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tv_welcome_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Hi Rechard"
-                    android:textColor="#dd3d00"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:text="Welcome!"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <TextView
                     android:id="@+id/textView2"

@@ -21,12 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.SignUpActivity"
+        <activity android:name=".view.LoginActivity"
             android:exported="true" />
         <activity android:name=".view.RegisterActivity"
             tools:ignore="Instantiatable"
             android:exported="true" />
 
+        <activity android:name=".view.WelcomeActivity"
+            tools:ignore="Instantiatable"
+            android:exported="true" />
     </application>
 
 </manifest>

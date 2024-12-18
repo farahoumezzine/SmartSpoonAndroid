@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val getstartedBtn= findViewById<Button>(R.id.getStartedButton)
         getstartedBtn.setOnClickListener( {
             // Navigate to other interface for login/register
-            val intent= Intent(this, SignUpActivity::class.java)
+            val intent= Intent(this, LoginActivity::class.java)
             startActivity(intent)
         })
     }
