@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/logo"
+            android:contentDescription="App Logo" />
+
+        <EditText
+            android:id="@+id/et_display_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:hint="Display Name"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/gray"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:background="@android:color/white" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:hint="Email"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/gray"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:background="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Update Profile"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orange" />
+
+        <Button
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Change Password"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red" />
+
+        <Button
+            android:id="@+id/btn_delete_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Delete Account"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red" />
+
+    </LinearLayout>
+</RelativeLayout> 

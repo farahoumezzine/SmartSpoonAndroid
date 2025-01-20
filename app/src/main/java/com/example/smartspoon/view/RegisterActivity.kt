@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartspoon.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.example.smartspoon.utils.UserPreferences
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -22,17 +24,17 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etConfirmPassword: EditText
     private lateinit var btnRegister: Button
     private lateinit var tvLoginPrompt: TextView
-    private lateinit var tvPasswordStrength: TextView // For displaying password strength
+    private lateinit var tvPasswordStrength: TextView
     private lateinit var auth: FirebaseAuth
+    private lateinit var userPreferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        userPreferences = UserPreferences(this)
 
-        // Initialize views
         etName = findViewById(R.id.et_name)
         etEmail = findViewById(R.id.et_email)
         etPassword = findViewById(R.id.et_password)
@@ -41,53 +43,57 @@ class RegisterActivity : AppCompatActivity() {
         tvLoginPrompt = findViewById(R.id.tv_login_prompt)
         tvPasswordStrength = findViewById(R.id.tv_password_strength)
 
-        // Adding TextWatcher to check password strength
         etPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
             override fun afterTextChanged(s: Editable?) {
                 val password = s.toString()
                 val strength = getPasswordStrength(password)
-
-                // Update password strength display
                 tvPasswordStrength.text = strength.message
                 tvPasswordStrength.setTextColor(Color.parseColor(strength.color))
             }
         })
 
-        // Register button click listener
         btnRegister.setOnClickListener {
             registerUser()
         }
 
-        // Login prompt click listener
         tvLoginPrompt.setOnClickListener {
             navigateToLogin()
         }
     }
 
     private fun registerUser() {
-        // Get user input
         val name = etName.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
         val confirmPassword = etConfirmPassword.text.toString().trim()
 
-        // Validate input
         if (validateName(name) && validateEmail(email) && validatePassword(password, confirmPassword)) {
-            // Register user with Firebase Authentication
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Registration success
-                        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
-                        navigateToLogin() // Navigate to login after successful registration
+                        val user = auth.currentUser
+                        
+                        // Set display name in Firebase
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(name)
+                            .build()
+                        
+                        user?.updateProfile(profileUpdates)
+                            ?.addOnCompleteListener { profileTask ->
+                                if (profileTask.isSuccessful) {
+                                    // Save to SharedPreferences
+                                    userPreferences.saveUserDisplayName(name)
+                                    Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+                                    navigateToLogin()
+                                } else {
+                                    Toast.makeText(this, "Failed to set display name", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                     } else {
-                        // If registration fails, display a message to the user
-                        Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                        Log.w(TAG, "Registration:failure", task.exception)
+                        Toast.makeText(this, "Registration failed: ${task.exception?.message}", 
+                            Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -146,27 +152,26 @@ class RegisterActivity : AppCompatActivity() {
                     password.any { it.isUpperCase() } &&
                     password.any { it.isDigit() } &&
                     password.any { !it.isLetterOrDigit() } -> {
-                PasswordStrength("Strong", "#4CAF50") // Green
+                PasswordStrength("Strong", "#4CAF50")
             }
             password.length >= 6 &&
                     password.any { it.isLetter() } &&
                     password.any { it.isDigit() } -> {
-                PasswordStrength("Medium", "#FFC107") // Yellow
+                PasswordStrength("Medium", "#FFC107")
             }
             password.isNotEmpty() -> {
-                PasswordStrength("Weak", "#F44336") // Red
+                PasswordStrength("Weak", "#F44336")
             }
             else -> {
-                PasswordStrength("", "#000000") // No color
+                PasswordStrength("", "#000000")
             }
         }
     }
 
     private fun navigateToLogin() {
-        // Navigate to the login activity
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-        finish() // Call finish() to remove the registration activity from the back stack
+        finish()
     }
 
     companion object {

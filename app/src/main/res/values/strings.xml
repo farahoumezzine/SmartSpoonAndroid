@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SmartSpoon</string>
+    <!-- Pizza Descriptions -->
+    <string name="desc_margherita">Fresh mozzarella, tomatoes, basil, olive oil</string>
+    <string name="desc_pepperoni">Spicy pepperoni, mozzarella, tomato sauce</string>
+    <string name="desc_mediterranean">Olives, feta, spinach, sun-dried tomatoes</string>
+    <string name="desc_buffalo">Spicy buffalo chicken, blue cheese, ranch</string>
+    <string name="desc_four_cheese">Mozzarella, parmesan, gorgonzola, ricotta</string>
+    <string name="desc_spicy_veggie">Jalapeños, bell peppers, onions, mushrooms</string>
+    <string name="desc_bbq">BBQ chicken, red onions, cilantro</string>
+    <string name="desc_garden">Fresh vegetables, herbs, light cheese</string>
 </resources>

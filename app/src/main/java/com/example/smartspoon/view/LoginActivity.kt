@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartspoon.R
 import com.google.firebase.auth.FirebaseAuth
+import com.example.smartspoon.utils.UserPreferences
 
 class LoginActivity : AppCompatActivity() {
 
@@ -56,9 +57,20 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success
+                        val user = auth.currentUser
+                        val userPreferences = UserPreferences(this)
+                        userPreferences.saveUserData(
+                            email = user?.email ?: "",
+                            displayName = user?.displayName
+                        )
+
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                        navigateToWelcome()
+
+                        // Navigate to WelcomeActivity and clear the back stack
+                        val intent = Intent(this, WelcomeActivity::class.java)
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -93,12 +105,5 @@ class LoginActivity : AppCompatActivity() {
             }
             else -> true
         }
-    }
-
-    private fun navigateToWelcome() {
-        // Navigate to the WelcomeActivity
-        val intent = Intent(this, WelcomeActivity::class.java)
-        startActivity(intent)
-        finish() // finish() this activity
     }
 }
